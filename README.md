@@ -11,3 +11,7 @@
 - SOLID Concepts;
 - Design patterns;
 - Documentation with Swagger.
+
+## Test API
+
+  - (To test the API Routes, please follow the link:)[http://localhost:3333/api-docs/]
