@@ -2,7 +2,7 @@
 
  > API para criação e administração de usuários
 
-*Primeira parte do desafio.*
+*Primeira e segunda parte do desafio.*
 
 ## Pontos importantes do projetos:
 
@@ -14,4 +14,4 @@
 
 ## Test API
 
-  - (To test the API Routes, please follow the link:)[http://localhost:3333/api-docs/]
+  - API Test ==> http://localhost:3333/api-docs
