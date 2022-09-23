@@ -1,0 +1,238 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sample USer API",
+    "description": "This is a sample server for user application. Also, This is a part of Rocktseat's challenge.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Mathews A.",
+      "email": "mathews.mw@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/users",
+      "description": "Test API"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create User",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Fulano",
+                    "email": "funalo@email.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Something get wrong"
+          },
+          "400": {
+            "description": "User alredy exist"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List all users",
+        "description": "Returns list of Users based on ID",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "Needs the ID to get access to all list of users",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Something get wrong"
+        }
+      }
+    },
+    "/{user_id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find Users by ID",
+        "description": "Returns User based on ID",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update User",
+        "description": "Update a user to turn into as admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of user to turn as admin",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Fulano",
+                    "email": "funalo@email.com",
+                    "admin": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Admin"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Something get wrong"
+          },
+          "400": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Admin": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "admin": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "Users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "admin": {
+                "type": "boolean"
+              },
+              "created_at": {
+                "type": "Date"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
